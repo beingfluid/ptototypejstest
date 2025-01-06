@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype.js Output Viewer</title>
+    <style>
+        body {
+            background-color: magenta;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            height: 100vh;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+        }
+
+        .box {
+            width: 45%;
+            height: 80vh;
+            padding: 10px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            overflow-y: auto;
+        }
+
+        .box textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+            font-family: Courier, monospace;
+            background-color: #fff;
+            color: #333;
+            resize: none;
+        }
+
+        .output-box {
+            font-family: Courier, monospace;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            height: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left box: Input Prototype.js code -->
+        <div class="box">
+            <h3>Enter Prototype.js Code</h3>
+            <textarea id="prototypeCode" oninput="updateOutput()"></textarea>
+        </div>
+
+        <!-- Right box: Output of the Prototype.js code -->
+        <div class="box output-box" id="outputBox">
+            <h3>Output</h3>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script>
+    <script>
+        function updateOutput() {
+            var code = document.getElementById('prototypeCode').value;
+            try {
+                // Dynamically execute the Prototype.js code entered
+                var result = eval(code);
+                document.getElementById('outputBox').textContent = result;
+            } catch (e) {
+                document.getElementById('outputBox').textContent = "Error: " + e.message;
+            }
+        }
+    </script>
+</body>
+
+</html>
