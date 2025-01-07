@@ -97,3 +97,95 @@ gs.info(new ConstantsSI().myVar);
 
 gs.info(ConstantsSI.myConstVar);
 
+```
+
+```js
+var Calculator = Class.create();
+Calculator.prototype = {
+    initialize: function() {
+        this.total = 0;
+    },
+
+    calculate: function(inputValue) {
+        const expression = /\+|\-|\*|\//;
+        const numbers = inputValue.split(expression);
+
+        const numberA = parseInt(numbers[0]);
+        const numberB = parseInt(numbers[1]);
+
+        const operation = inputValue.match(expression);
+
+        if (Number.isNaN(numberA) || Number.isNaN(numberB) || operation == null) {
+            this.updateResult("Operation not recognized");
+            return;
+        }
+
+        this.add(numberA);
+
+        let result;
+
+        switch (operation[0]) {
+            case "+":
+                result = this.add(numberB);
+                break;
+            case "-":
+                result = this.substract(numberB);
+                break;
+            case "*":
+                result = this.multiply(numberB);
+                break;
+            case "/":
+                result = this.divide(numberB);
+                break;
+        }
+
+        this.updateResult(result);
+    },
+
+    updateResult: function(result) {
+        gs.info("result: " + result);
+    },
+
+
+    add: function(number) {
+        return (this.total += number);
+    },
+
+    substract: function(number) {
+        return (this.total -= number);
+    },
+
+    multiply: function(number) {
+        return (this.total *= number);
+    },
+
+    divide: function(number) {
+        if (number === 0) {
+            throw new Error("Can not divide by Zero.");
+        }
+        return (this.total /= number);
+    },
+
+    type: 'Calculator'
+};
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
